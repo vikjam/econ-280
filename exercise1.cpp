@@ -48,8 +48,6 @@ int main() {
 	}
 	cout << C << endl;
 
-	//C[AplusB .< 5] = 0;
-
 	// Exercise 1e
 	cout << "Exercise 1e (1)" << endl;
 	cout << B.rows(0, 1) * A.cols(1, 2) << endl;
