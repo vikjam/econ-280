@@ -32,7 +32,7 @@ int main() {
 	cout << A / B << endl;
 
 	// Exercise 1c
-	cout << "A\B:" << endl;
+	cout << "A\\B:" << endl;
 	cout << solve(A, B) << endl;
 
 	// Exercise 1d (C)
