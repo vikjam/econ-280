@@ -1,11 +1,3 @@
-/**
- * @Author: Shunsuke Hori
- * @Date:   2018-02-17T08:48:03-08:00
- * @Filename: exercise02.cpp
- * @Last modified by:   Shunsuke Hori
- * @Last modified time: 2018-02-17T20:11:22-08:00
- */
-
 #include <iostream>
 #include <random>
 
