@@ -1,11 +1,3 @@
-/**
- * @Author: Shunsuke Hori
- * @Date:   2018-02-22T20:20:52-08:00
- * @Filename: exercise03.cpp
- * @Last modified by:   Shunsuke Hori
- * @Last modified time: 2018-02-22T20:45:47-08:00
- */
-
 #include <iostream>
 #include <math.h>
 #include <armadillo>
