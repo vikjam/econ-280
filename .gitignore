@@ -144,3 +144,6 @@ config.rst
 
 /.project
 /.pydevproject
+
+# bat file to compile cpp file
+*.bat
