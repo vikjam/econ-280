@@ -1,6 +1,10 @@
 #include <iostream>
 #include <random>
 
+extern "C"{
+#include <gnuplot_i.h>
+}
+
 using namespace std;
 
 random_device seed_gen;
@@ -34,13 +38,22 @@ double autocov(double *ys, int T, double average){
 }
 
 //  compute average and autocovariance of ys
-void compute_statistics(int T, double init){
-    double ys [T];
-    simulate_ar1(ys, T, init);
+void compute_statistics(double *ys, int T){
     double average_y = mean(ys, T);
     cout << "average of simulated y is " << average_y << endl;
     double autocov_y = autocov(ys, T, average_y);
     cout << "autocovariance of simulated y is " << autocov_y << endl;
+}
+
+// plotting function
+void plot(double *ys, int T, char *filename, char *title){
+    gnuplot_ctrl * g = gnuplot_init();
+
+    gnuplot_cmd(g, "set terminal png");
+    gnuplot_cmd(g, filename);
+    gnuplot_setstyle(g, "lines");
+    gnuplot_plot_x(g, ys, T, title);
+    gnuplot_close(g);
 }
 
 int main(){
@@ -50,11 +63,21 @@ int main(){
 
     // Part (b)
     cout << "Part (b)" << endl;
-    compute_statistics(100, y_mean);
+    int Tb = 100;
+    double ys_b [Tb];
+    simulate_ar1(ys_b, Tb, y_mean);
+    compute_statistics(ys_b, Tb);
+    plot(ys_b, Tb, "set output \"exercise02_ar1_100.png\"", "AR(1) simulation");
 
     // Part (c)
     cout << "Part (c)" << endl;
-    compute_statistics(10000, y_mean);
+    int Tc = 10000;
+    double ys_c [Tc];
+    simulate_ar1(ys_c, Tc, y_mean);
+    compute_statistics(ys_c, Tc);
+    plot(ys_c, Tc, "set output \"exercise02_ar1_10000.png\"", "AR(1) simulation");
 
+    // Plot 
+    
     return 0;
 }
