@@ -147,3 +147,7 @@ config.rst
 
 # bat file to compile cpp file
 *.bat
+
+
+# libraries relying on
+/gnuplot_i
