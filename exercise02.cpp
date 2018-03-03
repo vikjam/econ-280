@@ -1,9 +1,6 @@
 #include <iostream>
 #include <random>
-
-extern "C"{
-#include <gnuplot_i.h>
-}
+#include "plotting.cpp"
 
 using namespace std;
 
@@ -45,16 +42,6 @@ void compute_statistics(double *ys, int T){
     cout << "autocovariance of simulated y is " << autocov_y << endl;
 }
 
-// plotting function
-void plot(double *ys, int T, char *filename, char *title){
-    gnuplot_ctrl * g = gnuplot_init();
-
-    gnuplot_cmd(g, "set terminal png");
-    gnuplot_cmd(g, filename);
-    gnuplot_setstyle(g, "lines");
-    gnuplot_plot_x(g, ys, T, title);
-    gnuplot_close(g);
-}
 
 int main(){
 
@@ -67,7 +54,10 @@ int main(){
     double ys_b [Tb];
     simulate_ar1(ys_b, Tb, y_mean);
     compute_statistics(ys_b, Tb);
-    plot(ys_b, Tb, "set output \"exercise02_ar1_100.png\"", "AR(1) simulation");
+    mat time_b = linspace(0, Tb-1, Tb);
+    mat data_b(ys_b, Tb, 1);
+    vector<string> labels{"AR(1) simulation"};
+    plot(time_b, data_b, vector<int> {1}, labels);
 
     // Part (c)
     cout << "Part (c)" << endl;
@@ -75,9 +65,9 @@ int main(){
     double ys_c [Tc];
     simulate_ar1(ys_c, Tc, y_mean);
     compute_statistics(ys_c, Tc);
-    plot(ys_c, Tc, "set output \"exercise02_ar1_10000.png\"", "AR(1) simulation");
-
-    // Plot 
+    mat time_c = linspace(0, Tc-1, Tc);
+    mat data_c(ys_c, Tc, 1);
+    plot(time_c, data_c, vector<int> {1}, labels);
     
     return 0;
 }
