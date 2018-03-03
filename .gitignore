@@ -147,3 +147,7 @@ config.rst
 
 # bat file to compile cpp file
 *.bat
+
+# header and source file to call gnuplot
+GNUPlot.h
+GNUPlot.cpp
