@@ -148,6 +148,6 @@ config.rst
 # bat file to compile cpp file
 *.bat
 
-
-# libraries relying on
-/gnuplot_i
+# header and source file to call gnuplot
+GNUPlot.h
+GNUPlot.cpp
