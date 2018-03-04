@@ -1,5 +1,6 @@
 #include <iostream>
 #include <random>
+#include "plotting.cpp"
 
 using namespace std;
 
@@ -34,14 +35,13 @@ double autocov(double *ys, int T, double average){
 }
 
 //  compute average and autocovariance of ys
-void compute_statistics(int T, double init){
-    double ys [T];
-    simulate_ar1(ys, T, init);
+void compute_statistics(double *ys, int T){
     double average_y = mean(ys, T);
     cout << "average of simulated y is " << average_y << endl;
     double autocov_y = autocov(ys, T, average_y);
     cout << "autocovariance of simulated y is " << autocov_y << endl;
 }
+
 
 int main(){
 
@@ -50,11 +50,24 @@ int main(){
 
     // Part (b)
     cout << "Part (b)" << endl;
-    compute_statistics(100, y_mean);
+    int Tb = 100;
+    double ys_b [Tb];
+    simulate_ar1(ys_b, Tb, y_mean);
+    compute_statistics(ys_b, Tb);
+    mat time_b = linspace(0, Tb-1, Tb);
+    mat data_b(ys_b, Tb, 1);
+    vector<string> labels{"AR(1) simulation"};
+    plot(time_b, data_b, vector<int> {1}, labels);
 
     // Part (c)
     cout << "Part (c)" << endl;
-    compute_statistics(10000, y_mean);
-
+    int Tc = 10000;
+    double ys_c [Tc];
+    simulate_ar1(ys_c, Tc, y_mean);
+    compute_statistics(ys_c, Tc);
+    mat time_c = linspace(0, Tc-1, Tc);
+    mat data_c(ys_c, Tc, 1);
+    plot(time_c, data_c, vector<int> {1}, labels);
+    
     return 0;
 }
