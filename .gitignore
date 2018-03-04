@@ -151,3 +151,6 @@ config.rst
 # header and source file to call gnuplot
 GNUPlot.h
 GNUPlot.cpp
+
+# armadillo
+/armadillo-8.300.4
