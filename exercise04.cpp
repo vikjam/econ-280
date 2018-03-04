@@ -23,7 +23,7 @@ int main(){
         logdata(t, 0) = log(data[t][0]);
         logdata(t, 1) = log(data[t][1]);
     }
-    mat time = linspace(0, T, T);
+    mat time = linspace(0, T-1, T);
     vector<string> labels{"Real GDO", "Hours"};
     plot(time, logdata, vector<int> {1, 2}, labels);
 
