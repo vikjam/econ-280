@@ -28,17 +28,18 @@ void save_data(mat ys, string fn){
     out.close();
 }
 
-int plot_from_file(string data_fn, vector<int> data_ind, vector<string> labels){
+int plot_from_file(string data_fn, vector<int> data_ind, vector<string> labels, string title){
 
     vector<string> script;
     script.push_back("reset");
+    script.push_back("set title \"" + title +"\"");
     for (int i = 0; i < data_ind.size(); i++){
         string ind = to_string(data_ind[i]+1);
         string label = labels[i];
         if (i == 0)
-            script.push_back("plot \"" + data_fn + "\" using 1:"+ ind +" w lp" +" title \""+label +"\"");
+            script.push_back("plot \"" + data_fn + "\" using 1:"+ ind +" w l" +" title \""+label +"\"");
         else
-            script.push_back("replot \"" + data_fn + "\" using 1:"+ ind +" w lp"+" title \""+label +"\"");
+            script.push_back("replot \"" + data_fn + "\" using 1:"+ ind +" w l"+" title \""+label +"\"");
     }
     
     GNUPlot plotter;
@@ -52,11 +53,14 @@ int plot_from_file(string data_fn, vector<int> data_ind, vector<string> labels){
     plotter.close();
 }
 
-int plot(mat x, mat ys, vector<int> data_ind, vector<string> labels){
+int plot(mat x, mat ys, vector<int> data_ind, vector<string> labels, string title){
     string temp_data_fn = "data";
     mat saved = join_rows(x, ys);
     save_data(saved, temp_data_fn);
-    plot_from_file(temp_data_fn, data_ind, labels);
+    plot_from_file(temp_data_fn, data_ind, labels, title);
     remove(temp_data_fn.c_str());
 }
 
+int plot(mat x, mat ys, vector<int> data_ind, vector<string> labels){
+    plot(x, ys, data_ind, labels, "");
+}
